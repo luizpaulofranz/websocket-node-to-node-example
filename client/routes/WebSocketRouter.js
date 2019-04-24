@@ -9,14 +9,13 @@ WebSocketRouter.route('/sendMessage').get(function (req, res) {
     res.render('ws/index');
 });
 
-WebSocketRouter.route('/post').post(function (req, res) {
-    console.log(req.body);
+WebSocketRouter.route('/sendComplexJson').get(function (req, res) {
     socket.send(JSON.stringify(jsonExample));
     res.render('ws/index');
 });
 
 WebSocketRouter.route('/post').post(function (req, res) {
-  const customMessage = new Coin(req.body);
+  const customMessage = req.body;
   console.log("Custom Message on /post route. WebSocketRouter.js", customMessage);
   socket.send(JSON.stringify(customMessage));
   res.render('ws/index');
