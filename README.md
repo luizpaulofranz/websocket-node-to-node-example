@@ -1,5 +1,5 @@
 # Two Node Apps, as websocket client and server
-Simple Node to Node servers web-sockets communication. Both, **server** and **client** are actually node projects, and both are servers, but server is a **websocket server**.
+Simple Node to Node servers web-sockets communication. Both, **server** and **client** are actually node projects, and both are http servers, but the folder *server* is a **websocket server**, and *client* a websocket client.
 
  - ***client*** has a simple CRUD example with express, mongoose and Mlab;
     - change your database connection data at: *client.js*
