@@ -1,0 +1,11 @@
+{
+  "name": "simple-chat",
+  "version": "2.0.0",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "^4.16.4",
+    "ws": "^6.2.0"
+  }
+}

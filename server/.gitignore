@@ -1,0 +1,14 @@
+# NodeJS specific #
+.nyc_output/
+coverage/
+node_modules/
+npm-debug.log
+package-lock.json
+test/*.log
+filesToSend/*
+!filesToSend/.gitkeep
+!filesToSend/gandalf.jpg
+
+ssl/*
+!ssl/MyCertificate.crt
+!ssl/MyKey.key
