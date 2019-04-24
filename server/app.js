@@ -15,10 +15,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 /** ########################################################### */
 app.post('/sendBroadcast', (req, res) => {
   //res.writeHead(200, {'Content-Type': 'application/json'});
+  console.log('entrou');
   if (sendMessageToAllClients() ) {
     return res.send({"status":"Ok"});
   } else {
-    return res.send({"status":"Error", "msg": "Não há clientes conectados!"});
+    return res.send({"status":"Error", "msg": "There is no connected clients!"});
   }
 });
 
@@ -62,8 +63,9 @@ const server = new https.createServer({
 const wss = new WebSocket.Server({ server });
 // contem todos os sockets dos clientes
 // hold all client sockets
-let clients = [];
+let clients = {};
 
+/** ####### NEW CONNECTION EVENT ####### */
 wss.on('connection', (socket, req) => {
   // we get the IP connection, it'll be our socket ID
   let ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
@@ -90,15 +92,17 @@ const sendMessageToSpecificClient = (clientId, message) => {
   }
 }
 
-const sendMessageToAllClients = (message = 'Hello my clients!') => {
-  //clients.send(message);
-  if(clients.length > 0){
-    clients.forEach( client => {
-      client.send(message);
+const sendMessageToAllClients = (message = 'Broadcast! Hello my clients!') => {
+  // console.log(typeof clients);
+  // console.log(Object.keys(clients).length);
+  
+  if (Object.keys(clients).length > 0) {
+    Object.keys(clients).forEach( clientId => {
+      clients[clientId].send(message);
     });
     return true;
   } else {
-    console.log('Não há clientes conectados!')
+    console.log('There is no connected clients!')
     return false;
   }
 }
